@@ -1,0 +1,27 @@
+lzc-sdk-version: "0.1"
+name: Pandora Helper
+package: cloud.lazycat.app.pandora-helper
+version: 1.3.5
+description: 轻松和您的好友分享Claude账号的服务
+homepage: https://github.com/nianhua99/PandoraHelper/
+author: nianhua99
+application:
+  subdomain: pandora-helper
+  background_task: true
+  multi_instance: false
+  gpu_accel: false
+  kvm_accel: false
+  usb_accel: false
+  public_path:
+    - /
+  routes:
+    - /=http://pandora-helper.cloud.lazycat.app.pandora-helper.lzcapp:9000/
+services:
+  pandora-helper:
+    image: docker.hlmirror.com/q11391/pandora-helper
+    binds:
+      - /lzcapp/var/data:/app/data
+    setup_script: |
+      if [ ! -f /app/data/config.json ]; then
+        cp /lzcapp/pkg/content/config.json /app/data/config.json
+      fi

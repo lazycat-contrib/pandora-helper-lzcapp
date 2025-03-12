@@ -1,0 +1,34 @@
+{
+  "name": "Pandora Helper",
+  "package": "cloud.lazycat.app.pandora-helper",
+  "description": "轻松和您的好友分享Claude账号的服务",
+  "homepage": "https://github.com/nianhua99/PandoraHelper/",
+  "author": "nianhua99",
+  "app_features": [
+    "background_task",
+    "public_path"
+  ],
+  "subdomain": "pandora-helper",
+  "version": "1.3.5",
+  "public_paths": [
+    "/"
+  ],
+  "iconPath": "icon.png",
+  "composePath": "docker-compose.yml",
+  "unsupported_platforms": [],
+  "lastRouteType": "from_compose",
+  "port_mappings": {
+    "pandora-helper_9000_9000": {
+      "use": true,
+      "type": "http",
+      "path": "/",
+      "targetPath": "/"
+    }
+  },
+  "image_q11391_pandora-helper": {
+    "originalImage": "q11391/pandora-helper",
+    "pushTarget": "none"
+  },
+  "pandora-helper_volume_/app/data_action": "emptyDir",
+  "pandora-helper_volume_/app/data_location": "app_data"
+}

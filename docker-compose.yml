@@ -1,0 +1,8 @@
+services:
+    pandora-helper:
+        network_mode: bridge
+        ports:
+            - 9000:9000
+        volumes:
+            - ./data:/app/data
+        image: q11391/pandora-helper
