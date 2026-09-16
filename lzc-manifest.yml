@@ -6,11 +6,10 @@ application:
   upstreams:
     - location: /
       backend: http://pandora-helper:9000/
-
 services:
   pandora-helper:
-    # upstream: q11391/pandora-helper:latest
-    image: q11391/pandora-helper:latest
+    # upstream: q11391/pandora-helper:latest@sha256:d2018271c6f456d092944316547bcd888dea5fe74ef6ed4a26e5d48c5a884720
+    image: registry.lazycat.cloud/czyt/q11391/pandora-helper:0e797f03d0576a56
     binds:
       - /lzcapp/var/data:/app/data
     setup_script: |
