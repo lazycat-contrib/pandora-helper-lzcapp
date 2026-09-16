@@ -1,0 +1,19 @@
+application:
+  subdomain: pandora-helper
+  background_task: true
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://pandora-helper:9000/
+
+services:
+  pandora-helper:
+    # upstream: q11391/pandora-helper:latest
+    image: q11391/pandora-helper:latest
+    binds:
+      - /lzcapp/var/data:/app/data
+    setup_script: |
+      if [ ! -f /app/data/config.json ]; then
+        cp /lzcapp/pkg/content/config.json /app/data/config.json
+      fi

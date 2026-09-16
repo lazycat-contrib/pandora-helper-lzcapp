@@ -1,0 +1,41 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/pandora-helper.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: pandora-helper
+    bump: patch
+build:
+  run_buildscript: false
+images:
+  # 主应用：上游最新稳定 release 为 v1.3.5，低于当前应用版本 1.3.6（immutable semver 家族会触发
+  # VERSION_DOWNGRADE_BLOCKED）；改用 mutable latest + bump: patch，由 Action 在 latest digest
+  # 变化时自动升 patch 版本
+  - id: pandora-helper
+    target: service
+    service: pandora-helper
+    source: q11391/pandora-helper
+    channel: custom
+    sort: created
+    tag_regex: '^latest$'
+    delivery:
+      mode: lazycat
+stores:
+  official:
+    enabled: true
+    skip_if_version_exists: true
+    changelog_locales: [zh, en]
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: Pandora Helper
+    summary: "轻松和您的好友分享Claude账号的服务"
